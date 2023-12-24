@@ -42,6 +42,14 @@ DWBLocalPlanner:
   linear_granularity: 0.05
   # sim_period
   # include_last_point
+  
+  forward_sampling_distance: 0.5
+  angular_dist_threshold: 0.785 # 45 degrees
+  rotate_to_heading_angular_vel: 1.0
+  max_angular_accel: 3.2
+  simulate_ahead_time: 1.0
+  global_path_size_threshold global: 30
+  robot_base_frame_id: base_link
 
   # Goal checking
   goal_checker_name: dwb_plugins::SimpleGoalChecker
