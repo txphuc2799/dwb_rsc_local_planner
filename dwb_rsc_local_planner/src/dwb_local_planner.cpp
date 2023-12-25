@@ -176,6 +176,7 @@ void DWBLocalPlanner::setGoalPose(const nav_2d_msgs::Pose2DStamped& goal_pose)
   ROS_INFO_NAMED("DWBLocalPlanner", "New Goal Received.");
   goal_pose_ = goal_pose;
   is_collision = false;
+  path_updated_ = true;
   traj_generator_->reset();
   goal_checker_->reset();
   for (TrajectoryCritic::Ptr critic : critics_)
@@ -186,7 +187,6 @@ void DWBLocalPlanner::setGoalPose(const nav_2d_msgs::Pose2DStamped& goal_pose)
 
 void DWBLocalPlanner::setPlan(const nav_2d_msgs::Path2D& path)
 {
-  path_updated_ = true;
   pub_.publishGlobalPlan(path);
   global_plan_ = path;
 }
