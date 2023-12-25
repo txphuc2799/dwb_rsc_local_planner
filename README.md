@@ -11,4 +11,4 @@ $ cd ..
 $ catkin_make
 ```
 # Video demo
-![Video](https://www.youtube.com/watch?v=D3hKsPmcZc8](https://www.youtube.com/watch?v=szuLjqeD2IY)https://www.youtube.com/watch?v=szuLjqeD2IY)
+[![Video](https://img.youtube.com/vi/szuLjqeD2IY/maxresdefault.jpg)](https://www.youtube.com/watch?v=szuLjqeD2IY)
