@@ -175,8 +175,7 @@ void DWBLocalPlanner::setGoalPose(const nav_2d_msgs::Pose2DStamped& goal_pose)
 {
   ROS_INFO_NAMED("DWBLocalPlanner", "New Goal Received.");
   goal_pose_ = goal_pose;
-  is_collision = false;
-  path_updated_ = true;
+  reset();
   traj_generator_->reset();
   goal_checker_->reset();
   for (TrajectoryCritic::Ptr critic : critics_)
@@ -254,8 +253,6 @@ nav_2d_msgs::Twist2DStamped DWBLocalPlanner::computeVelocityCommands(const nav_2
 
   try
   {
-    dwb_rsc_msgs::TrajectoryScore best = coreScoringAlgorithm(pose.pose, velocity, results);
-
     if (!is_collision){
       if (global_plan_.poses.size() >= global_path_size_threshold_){
         if (path_updated_){
@@ -284,6 +281,8 @@ nav_2d_msgs::Twist2DStamped DWBLocalPlanner::computeVelocityCommands(const nav_2
         }
       }
     }
+
+    dwb_rsc_msgs::TrajectoryScore best = coreScoringAlgorithm(pose.pose, velocity, results);
 
     // Return Value
     nav_2d_msgs::Twist2DStamped cmd_vel;
@@ -596,6 +595,12 @@ bool DWBLocalPlanner::isInValidCost(const unsigned char cost)
   return cost == costmap_->LETHAL_OBSTACLE ||
          cost == costmap_->INSCRIBED_INFLATED_OBSTACLE ||
          cost == costmap_->NO_INFORMATION;
+}
+
+void DWBLocalPlanner::reset()
+{
+  is_collision = false;
+  path_updated_ = true;
 }
 
 }  // namespace dwb_rsc_local_planner
