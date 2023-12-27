@@ -223,6 +223,11 @@ protected:
    */
   bool isInValidCost(const unsigned char cost);
 
+  /**
+   * @brief Reset some values when recieve the new goal
+   */
+  void reset();
+
   nav_2d_msgs::Path2D global_plan_;  ///< Saved Global Plan
   nav_2d_msgs::Pose2DStamped goal_pose_;  ///< Saved Goal Pose
   bool prune_plan_;
